@@ -152,8 +152,9 @@ def fetch_feed(source: str, url: str, limit: int = 20) -> list[dict]:
         return []
 
 
-def run(sources: list[str] | None = None, min_score: int = 2, limit: int = 20, show_all: bool = False):
+def run(sources: list[str] | None = None, min_score: int = 2, limit: int = 20, show_all: bool = False, save: bool = False):
     """Main function — fetch feeds and display results."""
+    import os
 
     feeds_to_check = {k: v for k, v in FEEDS.items() if sources is None or k in sources}
 
@@ -197,6 +198,19 @@ def run(sources: list[str] | None = None, min_score: int = 2, limit: int = 20, s
     if not all_articles:
         print("  (sem artigos relevantes encontrados)")
 
+    if save:
+        save_dir = os.path.expanduser("~/mind/news")
+        os.makedirs(save_dir, exist_ok=True)
+        date_str = datetime.now().strftime("%Y-%m-%d")
+        save_path = os.path.join(save_dir, f"{date_str}.json")
+        with open(save_path, "w", encoding="utf-8") as f:
+            json.dump({
+                "date": datetime.now().isoformat(),
+                "count": len(all_articles),
+                "articles": all_articles[:limit]
+            }, f, ensure_ascii=False, indent=2)
+        print(f"\n  💾 guardado em {save_path} ({len(all_articles[:limit])} artigos)")
+
 
 def main():
     parser = argparse.ArgumentParser(description="osno-news: agregador de notícias PT")
@@ -210,6 +224,8 @@ def main():
                         help="listar fontes disponíveis")
     parser.add_argument("--json", action="store_true",
                         help="output em JSON")
+    parser.add_argument("--save", action="store_true",
+                        help="guardar artigos em ~/mind/news/YYYY-MM-DD.json")
 
     args = parser.parse_args()
 
@@ -223,6 +239,7 @@ def main():
         sources=args.sources,
         min_score=args.min_score,
         limit=args.limit,
+        save=args.save,
     )
 
 
