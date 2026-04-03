@@ -14,7 +14,7 @@ from dateutil import parser as dateparser
 # RSS feeds PT
 FEEDS = {
     "observador":    "https://observador.pt/feed/",
-    "publico":       "https://www.publico.pt/rss",
+    "publico":       "http://feeds.feedburner.com/PublicoRSS",
     "dn":            "https://dn.pt/feed/",
     "cmjornal":      "https://www.cmjornal.pt/rss",
     "jornaleconomico": "https://jornaleconomico.sapo.pt/feed",
@@ -65,6 +65,8 @@ KEYWORDS = {
             "irão", "iran", "guerra", "nato", "trump", "europa", "ue",
             "rússia", "ucrânia", "israel", "energia", "petróleo",
             "macron", "merz", "scholz", "bruxelas",
+            "lajes", "açores", "ormuz", "hormuz", "houthis",
+            "estreito", "refinaria", "kuwait", "mq-9", "reaper",
         ],
         "weight": 1,
     },
