@@ -20,6 +20,8 @@ FEEDS = {
     "jornaleconomico": "https://jornaleconomico.sapo.pt/feed",
     "rtp":           "https://www.rtp.pt/noticias/rss",
     "sapo":          "https://noticias.sapo.pt/rss/",
+    # Tech EN
+    "hackernews":    "https://news.ycombinator.com/rss",
 }
 
 # Keywords por categoria com peso
@@ -75,8 +77,22 @@ KEYWORDS = {
         "keywords": [
             "inteligência artificial", "cibersegurança", "hack", "ransomware",
             "startup", "bitcoin", "crypto", "blockchain", "github",
+            # EN tech keywords for HackerNews
+            "ai", "llm", "openai", "anthropic", "google", "apple", "nvidia",
+            "kubernetes", "linux", "python", "rust", "golang",
+            "funding", "ipo", "layoffs", "acquisition",
+            "gpu", "inference", "model", "agent", "coding",
         ],
         "weight": 1,
+    },
+    # Finanças EN (para HN)
+    "financas_en": {
+        "keywords": [
+            "recession", "inflation", "interest rate", "fed", "central bank",
+            "stock market", "s&p", "nasdaq", "bond yield", "tariffs",
+            "gdp", "unemployment", "earnings", "revenue", "profit",
+        ],
+        "weight": 2,
     },
     # Polémicas / viral (só termos de alto impacto)
     "polemicas": {
