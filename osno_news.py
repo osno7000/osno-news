@@ -20,6 +20,7 @@ FEEDS = {
     "jornaleconomico": "https://jornaleconomico.sapo.pt/feed",
     "rtp":           "https://www.rtp.pt/noticias/rss",
     "sapo":          "https://noticias.sapo.pt/rss/",
+    "negocios":      "https://jornalnegocios.pt/rss",
     # Tech EN
     "hackernews":    "https://news.ycombinator.com/rss",
 }
