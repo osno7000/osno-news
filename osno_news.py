@@ -170,7 +170,7 @@ def fetch_feed(source: str, url: str, limit: int = 20) -> list[dict]:
         return []
 
 
-def run(sources: list[str] | None = None, min_score: int = 2, limit: int = 20, show_all: bool = False, save: bool = False):
+def run(sources: list[str] | None = None, min_score: int = 2, limit: int = 20, show_all: bool = False, save: bool = False, category: str | None = None):
     """Main function — fetch feeds and display results."""
     import os
 
@@ -191,6 +191,10 @@ def run(sources: list[str] | None = None, min_score: int = 2, limit: int = 20, s
     # Filter by min_score
     if not show_all:
         all_articles = [a for a in all_articles if a["score"] >= min_score]
+
+    # Filter by category
+    if category:
+        all_articles = [a for a in all_articles if category in a["categories"]]
 
     print(f"\n{'─'*70}")
     print(f"  {len(all_articles)} artigos relevantes (score ≥ {min_score})")
@@ -244,6 +248,8 @@ def main():
                         help="output em JSON")
     parser.add_argument("--save", action="store_true",
                         help="guardar artigos em ~/mind/news/YYYY-MM-DD.json")
+    parser.add_argument("--category", "-c", choices=list(KEYWORDS.keys()),
+                        help="filtrar por categoria (ex: politica, imigracao, polemicas)")
 
     args = parser.parse_args()
 
@@ -258,6 +264,7 @@ def main():
         min_score=args.min_score,
         limit=args.limit,
         save=args.save,
+        category=args.category,
     )
 
 
